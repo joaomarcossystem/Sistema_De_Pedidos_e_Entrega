@@ -338,4 +338,7 @@ Dessa forma, o projeto demonstra os conceitos de:
 - Abstract Factory;
 - Separação de responsabilidades;
 - Extensibilidade do código.
+
+- Feito por: **João Marcos Moura**
+- Unileste
 ````
