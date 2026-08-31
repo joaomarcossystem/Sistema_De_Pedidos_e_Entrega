@@ -12,7 +12,7 @@ import br.com.joaoexercicios.model.Pedido;
 import br.com.joaoexercicios.service.ServicoPagamento;
 
 /**
- * Essa é a classe principal, a main, a interface que o usuário vê, utiliza e interage
+ *  Essa é a classe principal, a main, a interface que o usuário vê, utiliza e interage
  * Classe responsável por executar a aplicação e demonstrar
  * o funcionamento dos padrões Abstract Factory e Factory Method.
  */
@@ -20,35 +20,56 @@ public class Aplicacao {
 
     public static void main(String[] args) {
 
+        // =========================================================
+        // CRIAÇÃO DOS PEDIDOS
+        // =========================================================
+
         /*
-         * Criação do pedido que será utilizado nos diferentes
-         * exemplos de pagamento e entrega.
+         * São criados dois pedidos diferentes para demonstrar
+         * os diferentes fluxos de pagamento e entrega.
          */
-        Pedido pedido = new Pedido(
+        Pedido pedido1 = new Pedido(
                 1,
                 "João",
                 "Rua das Flores, 100",
                 100.00
         );
 
+        Pedido pedido2 = new Pedido(
+                2,
+                "Maria",
+                "Avenida Brasil, 200",
+                50.00
+        );
+
         System.out.println("==============================================");
         System.out.println("       SISTEMA DE PEDIDOS E ENTREGAS");
         System.out.println("==============================================");
 
-        System.out.println("\nPedido criado:");
-        System.out.println("Número: " + pedido.getNumero());
-        System.out.println("Cliente: " + pedido.getCliente());
-        System.out.println("Endereço: " + pedido.getEndereco());
-        System.out.println("Valor: R$ " + pedido.getValor());
+        System.out.println("\nPedidos criados:");
+
+        System.out.println("\nPedido 1:");
+        System.out.println("Número: " + pedido1.getNumero());
+        System.out.println("Cliente: " + pedido1.getCliente());
+        System.out.println("Endereço: " + pedido1.getEndereco());
+        System.out.println("Valor: R$ " + pedido1.getValor());
+
+        System.out.println("\nPedido 2:");
+        System.out.println("Número: " + pedido2.getNumero());
+        System.out.println("Cliente: " + pedido2.getCliente());
+        System.out.println("Endereço: " + pedido2.getEndereco());
+        System.out.println("Valor: R$ " + pedido2.getValor());
 
 
         // =========================================================
-        // ABSTRACT FACTORY - PAGAMENTO PIX
+        // PEDIDO 1 - PIX + MOTO
         // =========================================================
 
         System.out.println("\n==============================================");
-        System.out.println("       PAGAMENTO COM PIX");
+        System.out.println("       PEDIDO 1 - PIX + MOTO");
         System.out.println("==============================================");
+
+        System.out.println("\n--- ABSTRACT FACTORY: PAGAMENTO PIX ---");
 
         System.out.println("Criando família de produtos para pagamento PIX...");
 
@@ -58,19 +79,14 @@ public class Aplicacao {
 
         System.out.println("Validando pagamento PIX...");
 
-        String reciboPix = servicoPagamentoPix.processar(pedido);
+        String reciboPix =
+                servicoPagamentoPix.processar(pedido1);
 
         System.out.println("Pagamento PIX validado com sucesso!");
         System.out.println(reciboPix);
 
 
-        // =========================================================
-        // FACTORY METHOD - ENTREGA POR MOTO
-        // =========================================================
-
-        System.out.println("\n==============================================");
-        System.out.println("       ENTREGA POR MOTO");
-        System.out.println("==============================================");
+        System.out.println("\n--- FACTORY METHOD: ENTREGA POR MOTO ---");
 
         System.out.println("Criando fábrica de entrega por moto...");
 
@@ -78,16 +94,18 @@ public class Aplicacao {
 
         System.out.println("Processando entrega...");
 
-        entregaMoto.processarPedido(pedido);
+        entregaMoto.processarPedido(pedido1);
 
 
         // =========================================================
-        // ABSTRACT FACTORY - PAGAMENTO CARTÃO
+        // PEDIDO 2 - CARTÃO + BICICLETA
         // =========================================================
 
         System.out.println("\n==============================================");
-        System.out.println("       PAGAMENTO COM CARTÃO");
+        System.out.println("       PEDIDO 2 - CARTÃO + BICICLETA");
         System.out.println("==============================================");
+
+        System.out.println("\n--- ABSTRACT FACTORY: PAGAMENTO CARTÃO ---");
 
         System.out.println("Criando família de produtos para pagamento com cartão...");
 
@@ -97,19 +115,14 @@ public class Aplicacao {
 
         System.out.println("Validando pagamento com cartão...");
 
-        String reciboCartao = servicoPagamentoCartao.processar(pedido);
+        String reciboCartao =
+                servicoPagamentoCartao.processar(pedido2);
 
         System.out.println("Pagamento com cartão validado com sucesso!");
         System.out.println(reciboCartao);
 
 
-        // =========================================================
-        // FACTORY METHOD - ENTREGA POR BICICLETA
-        // =========================================================
-
-        System.out.println("\n==============================================");
-        System.out.println("       ENTREGA POR BICICLETA");
-        System.out.println("==============================================");
+        System.out.println("\n--- FACTORY METHOD: ENTREGA POR BICICLETA ---");
 
         System.out.println("Criando fábrica de entrega por bicicleta...");
 
@@ -117,15 +130,15 @@ public class Aplicacao {
 
         System.out.println("Processando entrega...");
 
-        entregaBicicleta.processarPedido(pedido);
+        entregaBicicleta.processarPedido(pedido2);
 
 
         // =========================================================
-        // ABSTRACT FACTORY - PAGAMENTO BOLETO
+        // EXTENSÃO - BOLETO
         // =========================================================
 
         System.out.println("\n==============================================");
-        System.out.println("       PAGAMENTO COM BOLETO");
+        System.out.println("       EXTENSÃO - PAGAMENTO POR BOLETO");
         System.out.println("==============================================");
 
         System.out.println("Criando família de produtos para pagamento com boleto...");
@@ -137,18 +150,18 @@ public class Aplicacao {
         System.out.println("Validando pagamento com boleto...");
 
         String reciboBoleto =
-                servicoPagamentoBoleto.processar(pedido);
+                servicoPagamentoBoleto.processar(pedido1);
 
         System.out.println("Pagamento com boleto validado com sucesso!");
         System.out.println(reciboBoleto);
 
 
         // =========================================================
-        // FACTORY METHOD - RETIRADA NO ESTABELECIMENTO
+        // EXTENSÃO - RETIRADA
         // =========================================================
 
         System.out.println("\n==============================================");
-        System.out.println("       RETIRADA NO ESTABELECIMENTO");
+        System.out.println("       EXTENSÃO - RETIRADA");
         System.out.println("==============================================");
 
         System.out.println("Criando fábrica de retirada...");
@@ -157,7 +170,7 @@ public class Aplicacao {
 
         System.out.println("Processando retirada...");
 
-        entregaRetirada.processarPedido(pedido);
+        entregaRetirada.processarPedido(pedido2);
 
 
         // =========================================================
@@ -165,7 +178,7 @@ public class Aplicacao {
         // =========================================================
 
         System.out.println("\n==============================================");
-        System.out.println("       FIM");
+        System.out.println("       FIM DA DEMONSTRAÇÃO");
         System.out.println("==============================================");
 
         System.out.println("Todos os fluxos foram executados com sucesso.");
