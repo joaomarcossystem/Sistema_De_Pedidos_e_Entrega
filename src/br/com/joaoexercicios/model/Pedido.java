@@ -1,5 +1,12 @@
 package br.com.joaoexercicios.model;
 
+/**
+ * Representa um pedido realizado no sistema.
+ *
+ * A classe armazena as principais informações do pedido,
+ * como número, cliente, endereço e valor.
+ */
+
 public class Pedido {
 
     private int numero;
